@@ -4,6 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.regex.Pattern;
 
 /**
@@ -22,8 +25,8 @@ public class Registration extends JFrame {
         setLayout(new GridBagLayout());
         setLocationRelativeTo(null);
         JLabel formTitleLabel = new JLabel("Registration Form", JLabel.CENTER);
-        formTitleLabel.setFont(new Font("Arial", Font.BOLD, 16)); 
-        
+        formTitleLabel.setFont(new Font("Arial", Font.BOLD, 16));
+
         JLabel nameLabel = new JLabel("Name:");
         JTextField nameField = new JTextField(30);
 
@@ -73,7 +76,20 @@ public class Registration extends JFrame {
             } else if (!isValidContactNumber(contact)) {
                 JOptionPane.showMessageDialog(this, "Contact number must be 11 digits!", "Input Error", JOptionPane.ERROR_MESSAGE);
             } else {
-                JOptionPane.showMessageDialog(this, "Registration Successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                // Save data to a text file
+                try (BufferedWriter writer = new BufferedWriter(new FileWriter("registration_data.txt", true))) {
+                    writer.write("Name: " + name);
+                    writer.write(", Course: " + course);
+                    writer.write(", Year Level: " + year);
+                    writer.write(", Gender: " + gender);
+                    writer.write(", Address: " + address);
+                    writer.write(", Email: " + email);
+                    writer.write(", Contact No: " + contact);
+                    writer.newLine();
+                    JOptionPane.showMessageDialog(this, "Registration Successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(this, "Error saving data!", "File Error", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
 
@@ -95,7 +111,7 @@ public class Registration extends JFrame {
 
         gbc.gridx = 0;
         gbc.gridy = 0;
-        gbc.gridwidth = 3; 
+        gbc.gridwidth = 3;
         add(formTitleLabel, gbc);
 
         gbc.gridx = 0;
@@ -132,7 +148,7 @@ public class Registration extends JFrame {
 
         gbc.gridx = 1;
         gbc.gridy = 4;
-        add(maleButton, gbc); 
+        add(maleButton, gbc);
 
         gbc.gridx = 2;
         add(femaleButton, gbc);
@@ -171,7 +187,7 @@ public class Registration extends JFrame {
 
         gbc.gridx = 0;
         gbc.gridy = 8;
-        gbc.gridwidth = 3; 
+        gbc.gridwidth = 3;
         add(buttonPanel, gbc);
 
         setVisible(true);
