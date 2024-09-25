@@ -1,2 +1,3 @@
 Name: Kylle Marius M. Hardin, Course: BSCS-SE, Year Level: 3rd Year, Gender: Male, Address: Balite Site, Calapan City, Email: mariushardin@gmail.com, Contact No: 09924401084
 Name: John Doe, Course: BSIT-AGD, Year Level: 4th Year, Gender: Male, Address: 1321, Langit St. Manila, Email: johndoe@gmail.com, Contact No: 09123456789
+Name: Juan Dela Cruz, Course: BSCS-SE, Year Level: 3rd Year, Gender: Male, Address: Manila Philippines, Email: juandelacruz12@gmail.com, Contact No: 09987654321

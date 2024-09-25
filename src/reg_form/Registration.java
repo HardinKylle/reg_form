@@ -13,7 +13,8 @@ import java.util.regex.Pattern;
  * The Registration class creates a registration form GUI using Swing.
  * Users can input their personal information such as name, course,
  * year level, gender, address, email, and contact number.
- * The form includes options to register, clear the fields, or exit the application.
+ * The form includes options to register, clear the fields, storing data, 
+ * or exit the application.
  */
 
 public class Registration extends JFrame {
@@ -59,32 +60,32 @@ public class Registration extends JFrame {
         JButton exitButton = new JButton("Exit");
 
         registerButton.addActionListener(e -> {
-            String name = nameField.getText().trim();
+            String fullName = nameField.getText().trim();
             String course = (String) courseBox.getSelectedItem();
             String year = (String) yearBox.getSelectedItem();
             String gender = maleButton.isSelected() ? "Male" : femaleButton.isSelected() ? "Female" : "";
             String address = addressField.getText().trim();
-            String email = emailField.getText().trim();
-            String contact = contactField.getText().trim();
+            String emailAddress = emailField.getText().trim();
+            String contactNo = contactField.getText().trim();
 
             // Validate input fields
-            if (name.isEmpty() || course.isEmpty() || year.isEmpty() || gender.isEmpty() ||
-                address.isEmpty() || email.isEmpty() || contact.isEmpty()) {
+            if (fullName.isEmpty() || course.isEmpty() || year.isEmpty() || gender.isEmpty() ||
+                address.isEmpty() || emailAddress.isEmpty() || contactNo.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "All fields are required!", "Input Error", JOptionPane.ERROR_MESSAGE);
-            } else if (!isValidEmail(email)) {
+            } else if (!isValidEmail(emailAddress)) {
                 JOptionPane.showMessageDialog(this, "Invalid email format!", "Input Error", JOptionPane.ERROR_MESSAGE);
-            } else if (!isValidContactNumber(contact)) {
+            } else if (!isValidContactNumber(contactNo)) {
                 JOptionPane.showMessageDialog(this, "Contact number must be 11 digits!", "Input Error", JOptionPane.ERROR_MESSAGE);
             } else {
                 // Save data to a text file
                 try (BufferedWriter writer = new BufferedWriter(new FileWriter("registration_data.txt", true))) {
-                    writer.write("Name: " + name);
+                    writer.write("Name: " + fullName);
                     writer.write(", Course: " + course);
                     writer.write(", Year Level: " + year);
                     writer.write(", Gender: " + gender);
                     writer.write(", Address: " + address);
-                    writer.write(", Email: " + email);
-                    writer.write(", Contact No: " + contact);
+                    writer.write(", Email: " + emailAddress);
+                    writer.write(", Contact No: " + contactNo);
                     writer.newLine();
                     JOptionPane.showMessageDialog(this, "Registration Successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
                 } catch (IOException ex) {
